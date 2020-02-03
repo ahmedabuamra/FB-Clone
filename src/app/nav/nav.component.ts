@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(public db: DatabaseService) { }
 
   ngOnInit() {
   }
 
   clearNotifications() {
-    alert('test');
+    this.db.updateNotifications(0);
   }
 }

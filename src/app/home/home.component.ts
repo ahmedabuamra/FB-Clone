@@ -13,6 +13,10 @@ export class HomeComponent implements OnInit {
   }
 
   addPost(post: string) {
+    if (post == null || post.trim() == '') {
+      alert("Can't post an empty post!");
+      return;
+    }
     this.posts.push(post);
   }
 

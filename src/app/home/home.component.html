@@ -1,11 +1,19 @@
-<div style="text-align:center">
+<div class="container">
   <div>
-    <textarea #post> </textarea>
-    <div>
-      <button (click)="addPost(post.value); post.value = ''">Post</button>
-    </div>
+    <label>What's on your mind?</label>
+    <textarea #post type="text" cols="50" rows="10"> </textarea>
+    <button style="padding: 7px 15px;" class="button" type="submit"
+      (click)="addPost(post.value); post.value = ''">Post</button>
   </div>
-  <div *ngFor="let post of posts">
-    <p>{{ post }}</p>
-  </div>
+</div>
+
+
+<div class="post" *ngFor="let p of posts">
+  <p>
+    {{p}}
+    <button class="button">Like</button>
+    <button class="button" style="background: red">delete</button>
+  </p>
+  <textarea #post type="text" cols="50" rows="2"> </textarea>
+  <button class="button" type="submit" (click)="addPost(post.value); post.value = ''">Reply</button>
 </div>

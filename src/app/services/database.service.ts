@@ -11,16 +11,8 @@ export class DatabaseService {
   public allPosts: Post[] = [];
   public notifications = 0;
 
-
-  //replace the following configs with yours
   private firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
+
   };
 
   constructor() { }
@@ -30,9 +22,7 @@ export class DatabaseService {
   }
 
   addPostDB(post: Post) {
-    return firebase.database().ref('posts/' + post.key).set(post).then(() => {
-      this.allPosts.push(post);
-    });
+    return firebase.database().ref('posts/' + post.key).set(post);
   }
 
   countLike(index: number) {
@@ -51,13 +41,13 @@ export class DatabaseService {
   }
 
   notificationsListener() {
-    return firebase.database().ref('notifications/').on('value', (snapshot) => {
+    return firebase.database().ref('notifications').on('value', (snapshot) => {
       this.notifications = snapshot.val()
     });
   }
 
   updateNotifications(counter: number) {
-    return firebase.database().ref('notifications/').set(counter);
+    return firebase.database().ref('notifications').set(counter);
   }
 
   getAllPosts() {
@@ -81,9 +71,7 @@ export class DatabaseService {
 
   deletePost(index: number) {
     let post_ref = firebase.database().ref('posts/' + this.allPosts[index].key);
-    return post_ref.remove().then(() => {
-      this.allPosts.splice(index, 1);
-    });
+    return post_ref.remove();
   }
 
   addComment(comment: Comment, index: number) {
